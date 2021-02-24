@@ -1,0 +1,57 @@
+<mat-toolbar color="primary">
+  <button
+    [ngClass]="{
+      'hamburger hamburger--spin': true,
+      'is-active': drawer?.opened
+    }"
+    type="button"
+    aria-label="menu"
+    (click)="toggleSidenav()"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+  <span>App Name</span>
+  <span class="spacer"></span>
+  <mat-menu #appMenu="matMenu" xPosition="before">
+    <ng-template matMenuContent>
+      <button mat-menu-item (click)="onSignOut()">Sign out</button>
+    </ng-template>
+  </mat-menu>
+  <button
+    mat-button
+    *ngIf="user$ | async as user; else signIn"
+    [matMenuTriggerFor]="appMenu"
+  >
+    {{ user }}
+  </button>
+  <ng-template #signIn>
+    <button mat-button (click)="onSignIn()">Sign in</button>
+  </ng-template>
+</mat-toolbar>
+<mat-drawer-container class="layout-container" autosize>
+  <mat-drawer
+    #drawer
+    class="layout-sidenav"
+    [mode]="(isSmallScreen$ | async) ? 'over' : 'side'"
+  >
+    <mat-nav-list>
+      <a
+        mat-list-item
+        (click)="route(link.endpoint)"
+        [routerLink]="[link.endpoint]"
+        routerLinkActive="is-active"
+        [attr.aria-label]="link.name"
+        *ngFor="let link of links"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        {{ link.name }}
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="layout-main">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

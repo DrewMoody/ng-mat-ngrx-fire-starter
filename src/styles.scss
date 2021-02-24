@@ -1,0 +1,66 @@
+@use '_colors';
+@use '~@angular/material/theming';
+@import "./meyer-reset.scss";
+
+@include theming.mat-core();
+
+$theme: theming.mat-light-theme(
+  (
+    color: (
+      primary: colors.$primary,
+      accent: colors.$accent,
+      warn: colors.$warn,
+    ),
+  )
+);
+
+@include theming.angular-material-theme($theme);
+
+/**
+* RESET PREFS
+*/
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}

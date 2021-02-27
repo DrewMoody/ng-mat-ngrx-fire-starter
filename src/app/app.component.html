@@ -14,21 +14,36 @@
   </button>
   <span>App Name</span>
   <span class="spacer"></span>
-  <mat-menu #appMenu="matMenu" xPosition="before">
+  <mat-menu #userMenu="matMenu" xPosition="before">
     <ng-template matMenuContent>
       <button mat-menu-item (click)="onSignOut()">Sign out</button>
     </ng-template>
   </mat-menu>
-  <button
-    mat-button
-    *ngIf="user$ | async as user; else signIn"
-    [matMenuTriggerFor]="appMenu"
-  >
-    {{ user }}
-  </button>
-  <ng-template #signIn>
-    <button mat-button (click)="onSignIn()">Sign in</button>
-  </ng-template>
+  <mat-menu #signInMenu="matMenu" xPosition="before">
+    <ng-template matMenuContent>
+      <button mat-menu-item (click)="onSignInGoogle()">
+        Sign In With Google
+      </button>
+    </ng-template>
+  </mat-menu>
+  <ng-container *ngIf="userAuth$ | async">
+    <button
+      mat-button
+      class="user-button"
+      *ngIf="user$ | async as user; else signIn"
+      [matMenuTriggerFor]="userMenu"
+    >
+      <img
+        class="user-photo"
+        [src]="user.photoURL"
+        [alt]="user.displayName + ' photo'"
+      />
+      {{ user.displayName }}
+    </button>
+    <ng-template #signIn>
+      <button mat-button [matMenuTriggerFor]="signInMenu">Sign in</button>
+    </ng-template>
+  </ng-container>
 </mat-toolbar>
 <mat-drawer-container class="layout-container" autosize>
   <mat-drawer

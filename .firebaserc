@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ngrx-fire-starter": {
+      "hosting": {
+        "ng-mat-ngrx-fire-starter": [
+          "ngrx-fire-starter"
+        ]
+      }
+    }
+  }
+}

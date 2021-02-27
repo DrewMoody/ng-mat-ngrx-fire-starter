@@ -64,3 +64,18 @@ strong {
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
+
+/**
+* GLOBAL STYLES
+*/
+
+.page-title {
+  margin: 0 0 16px !important;
+}
+
+.user-photo {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  margin-right: 8px;
+}

@@ -1,1 +1,24 @@
-<p>login works!</p>
+<ng-container *ngIf="user$ | async as user">
+  <div class="sign-in">
+    <h2 class="mat-display-1 page-title">Login</h2>
+    <app-loader [@inOutLoader] *ngIf="user === 'undefined'"></app-loader>
+    <button
+      [@inOutLogin]="user"
+      *ngIf="user === 'null'"
+      mat-flat-button
+      color="primary"
+      (click)="onGoogleSignIn()"
+    >
+      Sign In With Google
+    </button>
+    <div [@inOutLogin] *ngIf="user !== 'null' && user !== 'undefined'">
+      <p class="mat-subheading-2">
+        <strong>Signed in as:</strong>
+        {{ user.displayName }}
+      </p>
+      <button mat-flat-button color="primary" (click)="onSignOut()">
+        Sign Out
+      </button>
+    </div>
+  </div>
+</ng-container>
